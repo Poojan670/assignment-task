@@ -1,0 +1,45 @@
+version: "3"
+services:
+  client:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    expose:
+      - 80
+    ports:
+      - 3000:80
+    volumes:
+      - ./:/app
+    depends_on:
+      - server
+    networks:
+      - assignment
+
+  server:
+    build:
+      context: ./api
+      dockerfile: Dockerfile
+    ports:
+      - 8000:8000
+    volumes:
+      - ./api:/app
+    depends_on:
+      - db
+    networks:
+      - assignment
+
+  db:
+    image: mongo
+    ports:
+      - 27017:27017
+    volumes:
+      - mongo-data:/data/db
+    networks:
+      - assignment
+
+networks:
+  assignment:
+    driver: bridge
+
+volumes:
+  mongo-data:

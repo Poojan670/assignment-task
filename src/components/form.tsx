@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import Logo from "../assets/react.svg";
 import { fetchPostRequest } from "../utils/fetch";
 import { useDispatch } from "react-redux";
-import { errorFunction, successFunction } from "../utils/alert";
+import { successFunction } from "../utils/alert";
 
 interface FormValues {
   username: string;
