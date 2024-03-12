@@ -1,27 +1,28 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import "./App.css";
-import Home from "./pages/home";
-import SignUp from "./pages/signup";
-import Login from "./pages/login";
-import NotFound from "./pages/notfound";
+import React, { Suspense } from "react";
+import Loading from "./components/loading";
+import AuthLayout from "./utils/layout";
+import { toast } from "react-toastify";
 
+toast.configure();
 const App: React.FC = () => {
-  const accessToken = localStorage.getItem("accessToken");
+  const Login = React.lazy(() => import("./pages/login"));
+  const SignUp = React.lazy(() => import("./pages/signup"));
+  const Home = React.lazy(() => import("./pages/home"));
+  const NotFound = React.lazy(() => import("./pages/notfound"));
 
   return (
-    <BrowserRouter>
+    <Suspense fallback={<Loading />}>
       <Routes>
-        {accessToken ? (
+        <Route element={<AuthLayout />}>
           <Route path="/" element={<Home />}></Route>
-        ) : (
-          <>
-            <Route path="/login" element={<Login />}></Route>
-            <Route path="/sign-up" element={<SignUp />}></Route>
-          </>
-        )}
-        <Route path="*" element={<NotFound />}></Route>
+        </Route>
+        <Route path="/login" element={<Login />} />
+        <Route path="/sign-up" element={<SignUp />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
-    </BrowserRouter>
+    </Suspense>
   );
 };
 

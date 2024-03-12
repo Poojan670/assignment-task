@@ -1,7 +1,9 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Logo from "../assets/react.svg";
 import { fetchPostRequest } from "../utils/fetch";
+import { useDispatch } from "react-redux";
+import { errorFunction, successFunction } from "../utils/alert";
 
 interface FormValues {
   username: string;
@@ -29,6 +31,8 @@ const AuthForm: React.FC<Props> = ({
   hyperLinkText,
 }) => {
   const [formData, setFormData] = useState<FormValues>(initialFormValues);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -55,10 +59,17 @@ const AuthForm: React.FC<Props> = ({
       alert("Please enter username and password");
       return;
     }
-    await fetchPostRequest(
+    const response = await fetchPostRequest(
       `${import.meta.env.VITE_APP_BASE_URL}/api/v1/auth-app/login`,
       JSON.stringify({ username, password })
     );
+    const accessToken = response?.access_token;
+    dispatch({
+      type: "LOGIN",
+      payload: { access_token: accessToken, username: response?.username },
+    });
+    successFunction("Login Successfully");
+    navigate("/");
   };
 
   const handleSignUp = async (e: React.FormEvent) => {
@@ -73,6 +84,9 @@ const AuthForm: React.FC<Props> = ({
       `${import.meta.env.VITE_APP_BASE_URL}/api/v1/auth-app/sign-up`,
       JSON.stringify({ username, password })
     );
+    dispatch({ type: "SIGNUP" });
+    successFunction("Successfully signed up");
+    navigate("/login");
   };
 
   return (

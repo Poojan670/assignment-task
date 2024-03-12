@@ -8,7 +8,7 @@ const notfound: React.FC = () => {
         <h1>Page Not found</h1>
       </section>
       <p>
-        <Link to="/login">Go Back</Link>
+        <Link to="/">Go Back</Link>
       </p>
     </div>
   );
