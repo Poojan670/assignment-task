@@ -1,0 +1,78 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.logo {
+  margin-bottom: 20px;
+}
+
+form {
+  width: 300px;
+  border: 1px solid var(--dark-color);
+  padding: 20px;
+  border-radius: 5px;
+}
+
+label {
+  margin-bottom: 5px;
+}
+
+input {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+  border: 1px solid var(--light-grey-color);
+  border-radius: 3px;
+  text-shadow: 1px 1px var(--light-grey-color);
+}
+
+button {
+  width: 100%;
+  padding: 10px;
+  background-color: var(--secondary-color);
+  color: var(--primary-color);
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: var(--secondary-color);
+}
+
+div {
+  margin-top: 10px;
+}
+
+a {
+  color: var(--secondary-color);
+  text-decoration: none;
+  margin-left: 5px;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+section {
+  padding: 20px;
+  background-color: var(--secondary-color);
+}
+
+section h1 {
+  color: var(--primary-color);
+}
