@@ -10,6 +10,7 @@ const App: React.FC = () => {
   const Login = React.lazy(() => import("./pages/login"));
   const SignUp = React.lazy(() => import("./pages/signup"));
   const Home = React.lazy(() => import("./pages/home"));
+  const Google = React.lazy(() => import("./pages/google"));
   const NotFound = React.lazy(() => import("./pages/notfound"));
 
   return (
@@ -20,6 +21,7 @@ const App: React.FC = () => {
         </Route>
         <Route path="/login" element={<Login />} />
         <Route path="/sign-up" element={<SignUp />} />
+        <Route path="/google" element={<Google />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </Suspense>
